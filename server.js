@@ -54,5 +54,18 @@ router.post('/todo', function(req, res) {
   });
 });
 
+router.delete('/todo/:id', function(req, res) {
+  var id = req.params.id;
+  var query = "DELETE FROM todo_table WHERE id='" + id + "'";
+  pool.query(query, function(err, rows) {
+    if (err) {
+      res.end("Error!");
+    }
+    else {
+      res.send("Todo deleted");
+    }
+  });
+});
+
 app.use('/api', router);
 app.listen(port);
